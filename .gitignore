@@ -4,6 +4,9 @@
 # Ignore cached facts
 cache/
 
+# Ignore collections
+collections/
+
 # Ignore temporary files
 *.retry
 *.log

@@ -34,6 +34,7 @@ playbooks/proxmox_node_setup.yaml
 roles/proxmox/node/tasks/main.yaml
 roles/proxmox/node/handlers/main.yaml
 roles/proxmox/node/templates/motd.j2
+vault/vault.yaml
 vault/hosts_vault.yaml
 ```
 Run:
