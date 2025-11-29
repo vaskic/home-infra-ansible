@@ -1,0 +1,9 @@
+# Ignore vault password
+.vault-pass
+
+# Ignore cached facts
+cache/
+
+# Ignore temporary files
+*.retry
+*.log
