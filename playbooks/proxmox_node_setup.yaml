@@ -1,0 +1,11 @@
+---
+- name: Setup Proxmox nodes
+  hosts: proxmox
+  become: true
+
+  vars_files:
+    - ../vault/vault.yaml     # celková citlivá data (např. hesla)
+    - ../vault/hosts_vault.yaml
+
+  roles:
+    - proxmox/node

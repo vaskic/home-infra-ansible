@@ -23,3 +23,21 @@ This repository contains the **Infrastructure as Code (IaC)** setup for my home 
 
 ```bash
 ansible-playbook playbooks/site.yaml --vault-password-file .vault-pass
+
+
+## Playbooks
+### proxmox node setup
+Files:
+```bash
+inventories/hosts.yaml
+playbooks/proxmox_node_setup.yaml
+roles/proxmox/node/tasks/main.yaml
+roles/proxmox/node/handlers/main.yaml
+roles/proxmox/node/templates/motd.j2
+vault/hosts_vault.yaml
+```
+Run:
+```bash
+ansible-playbook -i inventories/hosts.yaml playbooks/proxmox_node_setup.yaml
+```
+
