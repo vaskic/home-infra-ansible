@@ -1,0 +1,22 @@
+---
+- name: Initial server configuration
+  hosts: 
+    - proxmox
+    - dockerhosts
+  become: yes
+
+  vars_files:
+    - ../vault/vault.yaml
+    - ../vault/hosts_vault.yaml
+      
+  pre_tasks:
+    - name: Skip hosts marked as offline
+      meta: end_host
+      when: hostvars[inventory_hostname].enabled is defined and not hostvars[inventory_hostname].enabled
+
+  roles:
+    - role: initial_config
+      vars:
+        vim_custom_lines:
+          - "set number"
+          - "syntax on"

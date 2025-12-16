@@ -40,5 +40,17 @@ vault/hosts_vault.yaml
 Run:
 ```bash
 ansible-playbook -i inventories/hosts.yaml playbooks/proxmox_node_setup.yaml
+ansible-playbook -i inventories/hosts.yaml playbooks/proxmox_node_setup.yaml -e "target_hosts=dockerhost1"
 ```
 
+### initial config
+Files:
+```bash
+
+```
+
+Run:
+```bash
+ansible-playbook -i inventories/hosts.yaml playbooks/initial_config.yaml
+ansible-playbook -i inventories/hosts.yaml playbooks/initial_config.yaml --limit dockerhost1
+```

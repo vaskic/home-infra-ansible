@@ -1,0 +1,31 @@
+" General Vim configuration deployed via Ansible
+"
+" Disable compatibility with vi (enables full Vim features)
+set nocompatible
+" Enable normal backspace in insert mode
+set backspace=indent,eol,start
+" Show matching brackets
+set showmatch
+" Enable syntax highlighting
+syntax on
+
+" Force mouse off after all initialization
+autocmd VimEnter * set mouse=
+
+filetype indent off
+set noai
+set noautoindent
+set nocindent
+set nosmartindent
+set noexpandtab
+set tabstop=4
+set softtabstop=4
+set formatoptions-=t
+set indentexpr=''
+set indentkeys-=0#
+
+{% if vim_custom_lines is defined %}
+{% for line in vim_custom_lines %}
+{{ line }}
+{% endfor %}
+{% endif %}

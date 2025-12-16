@@ -1,0 +1,3 @@
+---
+# when role will be called without specification it will use empty list
+vim_custom_lines: []
