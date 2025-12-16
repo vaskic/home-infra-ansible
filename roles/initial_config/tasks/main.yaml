@@ -99,6 +99,8 @@
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
+      - python3-docker
+      - python3-yaml
     state: present
     update_cache: yes
   when: "'dockerhost' in node_purpose"
