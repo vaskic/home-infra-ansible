@@ -1,43 +1,46 @@
 all:
   vars:
-    # domain je načítaná z vaultu
     domain: "{{ vault_domain }}"
+    ansible_user: ansible
 
   children:
     proxmox:
       hosts:
         proxmox1:
           ansible_host: "{{ vault_hosts[inventory_hostname].ip }}"
-          #          hostname: "{{ vault_proxmox1_hostname }}"
+          hostname: "{{ vault_proxmox1_hostname }}"
           environment: "prod"
           ansible_user: root
           become: false
           node_purpose:
             - management
-            - backup
+            - proxmox
         proxmox2:
           ansible_host: "{{ vault_hosts[inventory_hostname].ip }}"
-          #hostname: "{{ vault_proxmox2_hostname }}"
+          hostname: "{{ vault_proxmox2_hostname }}"
           environment: "prod"
           ansible_user: root
           become: false            
           node_purpose:
             - management
+            - proxmox
 
     kubernetes:
       children:
-        k8s-master:
+        k8s_master:
           hosts:
             k8s-master:
+              enabled: false
               ansible_host: "{{ vault_k8s_master_ip }}"
               hostname: "{{ vault_k8s_master_hostname }}"
               environment: "lab"
               node_purpose:
                 - k8s
                 - k8s-master
-        k8s-workers:
+        k8s_workers:
           hosts:
             k8s-node1:
+              enabled: false
               ansible_host: "{{ vault_k8s_node1_ip }}"
               hostname: "{{ vault_k8s_node1_hostname }}"
               environment: "lab"
@@ -45,6 +48,7 @@ all:
                 - k8s
                 - k8s-worker
             k8s-node2:
+              enabled: false
               ansible_host: "{{ vault_k8s_node2_ip }}"
               hostname: "{{ vault_k8s_node2_hostname }}"
               environment: "lab"
@@ -52,6 +56,7 @@ all:
                 - k8s
                 - k8s-worker
             k8s-node3:
+              enabled: false
               ansible_host: "{{ vault_k8s_node3_ip }}"
               hostname: "{{ vault_k8s_node3_hostname }}"
               environment: "lab"
@@ -59,11 +64,21 @@ all:
                 - k8s
                 - k8s-worker
 
-    labservers:
+    dockerhosts:
       hosts:
         dockerhost1:
           ansible_host: "{{ vault_dockerhost1_ip }}"
           hostname: "{{ vault_dockerhost1_hostname }}"
-          environment: "lab"
+          environment: "prod"
           node_purpose:
-            - docker
+            - dockerhost
+            - management
+          venv: "pm51"
+        dockerhost2:
+          ansible_host: "{{ vault_dockerhost2_ip }}"
+          hostname: "{{ vault_dockerhost2_hostname }}"
+          environment: "prod"
+          node_purpose:
+            - dockerhost
+            - management
+          venv: "pm51"
