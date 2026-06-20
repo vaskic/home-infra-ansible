@@ -46,11 +46,11 @@ ansible-playbook -i inventories/hosts.yaml playbooks/proxmox_node_setup.yaml -e 
 ### initial config
 Files:
 ```bash
-
 ```
 
 Run:
 ```bash
 ansible-playbook -i inventories/hosts.yaml playbooks/initial_config.yaml
 ansible-playbook -i inventories/hosts.yaml playbooks/initial_config.yaml --limit dockerhost1
+ansible-playbook -i localhost, playbooks/initial_config.yaml -c local -K -e "node_purpose=desktop"
 ```
